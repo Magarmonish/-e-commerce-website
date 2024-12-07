@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar with Right-Side Menu</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      background-color: #333;
+      color: white;
+      padding: 10px 2px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      gap: 20px;
+      transition: max-height 0.5s ease; /* Smooth toggle effect */
+      overflow: hidden;
+    }
+
+    .nav-menu.active {
+      max-height: 300px; /* Adjust based on content height */
+    }
+
+    .nav-menu li {
+      position: relative;
+    }
+
+    .nav-menu li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: background 0.3s;
+    }
+
+    .nav-menu li a:hover {
+      background: #555;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #444;
+      top: 100%;
+      left: 0;
+      list-style: none;
+      padding: 10px 0;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 8px 12px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown-menu li a:hover {
+      background: #555;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .search-bar {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .day-night-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .day-night-toggle:hover {
+      transform: rotate(20deg);
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #444;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        padding: 10px;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">MyLogo</div>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li class="dropdown">
+        <a href="#about">About </a>
+        <ul class="dropdown-menu">
+         
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#services">Services </a>
+        <ul class="dropdown-menu">
+          
+        </ul>
+      </li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <button class="day-night-toggle" id="day-night-toggle">🌞</button>
+      </li>
+      <li>
+        <input type="text" class="search-bar" placeholder="Search...">
+      </li>
+      
+    </ul>
+  </div>
+
+  <script>
+    // JavaScript for functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const dayNightToggle = document.getElementById('day-night-toggle');
+    let isDay = true;
+
+    // Menu toggle functionality
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Day/night toggle functionality
+    dayNightToggle.addEventListener('click', () => {
+      isDay = !isDay;
+      dayNightToggle.textContent = isDay ? '🌞' : '🌜';
+      document.body.style.backgroundColor = isDay ? '#f0e68c' : '#2c3e50';
+      document.body.style.color = isDay ? '#000' : '#ecf0f1';
+    });
+  </script>
+</body>
+</html>
